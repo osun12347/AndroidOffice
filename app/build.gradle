@@ -18,6 +18,27 @@ android {
     }
 }
 
+    productFlavors {
+        production {
+            manifestPlaceholders = [HOCKEYAPP_APP_ID: "486d65b96e664fdeb94ff316a72cc681", APPLICATION_ID: "za.co.orderin.jarvisdriver"]
+            applicationId "za.co.orderin.jarvisdriver"
+            multiDexEnabled true
+            minSdkVersion 16
+        }
+        beta {
+            manifestPlaceholders = [HOCKEYAPP_APP_ID: "4020629cd0c248adbe0d0b90ef82e3b8", APPLICATION_ID: "za.co.orderin.jarvisdriver.beta"]
+            applicationId "za.co.orderin.jarvisdriver.beta"
+            multiDexEnabled true
+            minSdkVersion 16
+        }
+        development {
+            manifestPlaceholders = [HOCKEYAPP_APP_ID: "4020629cd0c248adbe0d0b90ef82e3b8", APPLICATION_ID: "za.co.orderin.jarvisdriver.development"]
+            applicationId "za.co.orderin.jarvisdriver.development"
+            multiDexEnabled true
+            minSdkVersion 16 //This is to allow multidex builds to execute faster
+        }
+    }
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.1.0'
