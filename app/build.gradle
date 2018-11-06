@@ -17,7 +17,7 @@ android {
         }
     }
 }
-
+flavorDimensions "variant"
     productFlavors {
         production {
             manifestPlaceholders = [HOCKEYAPP_APP_ID: "486d65b96e664fdeb94ff316a72cc681", APPLICATION_ID: "za.co.orderin.jarvisdriver"]
