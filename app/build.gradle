@@ -10,14 +10,8 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-}
-    flavorDimensions "version"
+    
+     flavorDimensions "version"
     productFlavors {
         demo {
             // Assigns this product flavor to the "version" flavor dimension.
@@ -32,6 +26,15 @@ android {
             versionNameSuffix "-full"
         }
     }
+    
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+   
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
