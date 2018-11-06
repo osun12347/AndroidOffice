@@ -11,26 +11,58 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     
-     flavorDimensions "version"
-    productFlavors {
-        demo {
-            // Assigns this product flavor to the "version" flavor dimension.
-            // This property is optional if you are using only one dimension.
-            dimension "version"
-            applicationIdSuffix ".demo"
-            versionNameSuffix "-demo"
+    buildTypes {
+        debug {
+            debuggable true
+            signingConfig signingConfigs.debugConfig
+            minifyEnabled false
         }
-        full {
-            dimension "version"
-            applicationIdSuffix ".full"
-            versionNameSuffix "-full"
+
+        debugProguard {
+            debuggable true
+            signingConfig signingConfigs.debugConfig
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles fileTree(dir: "proguard", include: ["*.pro"]).asList().toArray()
+        }
+
+        releaseBeta {
+            debuggable false
+            signingConfig signingConfigs.debugConfig
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles fileTree(dir: "proguard", include: ["*.pro"]).asList().toArray()
+        }
+
+        release {
+            debuggable false
+            /*signingConfig signingConfigs.releaseConfig -- add this if you want to sign manually */
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles fileTree(dir: "proguard", include: ["*.pro"]).asList().toArray()
         }
     }
-    
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+    flavorDimensions "variant"
+
+    productFlavors {
+        production {
+            manifestPlaceholders = [HOCKEYAPP_APP_ID: "486d65b96e664fdeb94ff316a72cc681", APPLICATION_ID: "za.co.orderin.jarvisdriver"]
+            applicationId "za.co.orderin.jarvisdriver"
+            multiDexEnabled true
+            minSdkVersion 16
+        }
+        beta {
+            manifestPlaceholders = [HOCKEYAPP_APP_ID: "4020629cd0c248adbe0d0b90ef82e3b8", APPLICATION_ID: "za.co.orderin.jarvisdriver.beta"]
+            applicationId "za.co.orderin.jarvisdriver.beta"
+            multiDexEnabled true
+            minSdkVersion 16
+        }
+        development {
+            manifestPlaceholders = [HOCKEYAPP_APP_ID: "4020629cd0c248adbe0d0b90ef82e3b8", APPLICATION_ID: "za.co.orderin.jarvisdriver.development"]
+            applicationId "za.co.orderin.jarvisdriver.development"
+            multiDexEnabled true
+            minSdkVersion 16 //This is to allow multidex builds to execute faster
         }
     }
 }
